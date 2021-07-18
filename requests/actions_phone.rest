@@ -1,0 +1,16 @@
+
+POST http://localhost:3001/api/persons/
+content-type:  application/json
+
+{
+    "name": "VV oo",
+    "number": "01879456"
+}
+
+###
+
+GET http://localhost:3001/api/persons/60eeef01e8b135428055dca6
+
+###
+
+GET http://localhost:3001/info
