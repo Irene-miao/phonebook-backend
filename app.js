@@ -1,8 +1,9 @@
 const config = require('./utils/config')
 const express = require('express')
+require('express-async-errors')
 const app = express()
 const cors = require('cors')
-const notesRouter = require('./controllers/phones')
+const phonesRouter = require('./controllers/phones')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
@@ -28,7 +29,7 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger) // Access requestLogger middleware in middleware.js
 
-app.use('/api/persons', notesRouter)
+app.use('/api/persons', phonesRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler) // this has to be the last loaded middleware
