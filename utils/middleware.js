@@ -16,7 +16,7 @@ const unknownEndpoint = (request, response) => {
 
 // Middleware that catch errors
 const errorHandler = (error, request, response, next) => {
-  logger.error(error.message)
+
 
   // the error was caused by an invalid object id for Mongo
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
@@ -24,7 +24,17 @@ const errorHandler = (error, request, response, next) => {
   } else if (error.name === 'ValidationError') {
     // input does not pass validators eg: minLength not met
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token'
+    })
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({
+      error: 'token expired'
+    })
   }
+  logger.error(error.message)
+
   next(error)
 }
 

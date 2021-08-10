@@ -16,6 +16,10 @@ const phoneSchema = new mongoose.Schema({
     required: [true, 'number missing'],
   },
   date: { type: Date, default: Date.now },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
 })
 
 phoneSchema.plugin(uniqueValidator, {
